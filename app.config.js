@@ -1,4 +1,6 @@
-{
+import 'dotenv/config';
+
+export default{
   "expo": {
     "name": "whatsapp",
     "slug": "whatsapp",
@@ -22,6 +24,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+
+    extra:{
+      apiKey: process.env.API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      projectId: process.env.PROJECT_ID,
+      storageBucke: process.env.STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID,
+      appId:process.env.APP_ID
     }
   }
 }

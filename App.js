@@ -63,13 +63,28 @@ function MyTabs() {
         name="Camera" 
         component={CommunityScreen} 
         options={{
+        
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="camera" size={24} color="white" />  
           ),
         }} 
       />
-      <Tab.Screen name="Chats" component={AnotherScreen} />
+      <Tab.Screen name="Chats" component={AnotherScreen} 
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: () => (
+              <View style ={styles.tab}>
+                <Text style ={styles.texts}>CHATS</Text>
+                <View style={styles.messageCount}>
+                  <Text style={styles.messageCountText}>10</Text>
+                </View>
+              </View>
+              
+            )
+          }}
+        />
+
       <Tab.Screen name="Status" component={CommunityScreen} />
       <Tab.Screen name="Calls" component={CommunityScreen} />
     </Tab.Navigator>
@@ -118,6 +133,8 @@ function App({ navigation }) {
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
+
+
   );
 
 }
@@ -148,6 +165,42 @@ const styles = StyleSheet.create({
   iconButton: {
     marginHorizontal: 10,
   },
+  circle: {
+    width: 30, 
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'green',
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  text: {
+    color: 'white', // Text color
+    fontWeight: 'bold', // Make the text bold
+  },
+  tab:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    
+  },
+  texts:{
+    color: 'white',
+    fontWeight: 'bold', 
+    marginRight:3,
+    width: 50,
+  },
+  messageCount: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 2,
+ 
+  },
+  messageCountText: {
+    color: 'green',
+    fontSize:15,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }
 });
 
 export default App;

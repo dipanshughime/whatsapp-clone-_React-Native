@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 39,
     overflow: 'hidden',
+    borderWidth:2,
+    
     borderColor:'green',
   },
   image: {

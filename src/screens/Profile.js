@@ -2,13 +2,14 @@ import React ,{ useState }from 'react';
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { auth } from '../../config/firebase';
+import { auth ,storage, ref} from '../../config/firebase';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import {   getDownloadURL ,uploadBytes } from "firebase/storage";
 // import { getStorage, ref, putFile, getDownloadURL } from 'firebase/storage';
-import { getStorage, ref, uploadBytes, getDownloadURL  } from 'firebase/storage';
 
 
+// const storage = getStorage();
 const SettingsScreen = () => {
   const navigation = useNavigation();
   const [image, setImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_8Ndh_6Yi1w8G7Yg5iGtCQQVreP5sWLdUbg&s");
@@ -20,23 +21,51 @@ const SettingsScreen = () => {
       })
       .catch(error => console.error('Error signing out: ', error));
   };
-  const uploadImageToStorage = async (imageUri) => {
-    try {
-      const filename = imageUri.split('/').pop();
+
+
+  // const uploadImageToStorage = async (imageUri) => {
+  //   try {
+  //     if (!imageUri) {
+  //       throw new Error('Image URI is undefined or empty');
+  //     }
   
-      const storage = getStorage();
-      const storageRef = ref(storage, `images/${filename}`);
+  //     const filename = imageUri.split('/').pop();
+  //     const storageRef = ref(storage, `images/${filename}`);
+  //     const uploadTask = uploadBytes(storageRef, imageUri);
   
-      await putFile(storageRef, imageUri);
+  //     uploadTask.on('state_changed', 
+  //       (snapshot) => {
+  //         // Handle progress updates if needed
+  //       }, 
+  //       (error) => {
+  //         console.error('Error uploading image:', error);
+  //         throw error;
+  //       }, 
+  //       async () => {
+  //         // Upload completed successfully
+  //         const downloadURL = await getDownloadURL(storageRef);
+  //         console.log('Image uploaded successfully. Download URL:', downloadURL);
+  //         return downloadURL;
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.error('Error uploading image:', error);
+  //     throw error;
+  //   }
+  // };
+
+
+
+  async function uploadImageAsync(uri) {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const filename = uri.split('/').pop();
+    const storageRef = ref(storage, `profile/${filename}`);
+    await uploadBytes(storageRef, blob);
+    const url = await getDownloadURL(storageRef);
+    console.log(url);
+  }
   
-      const downloadURL = await getDownloadURL(storageRef);
-  
-      return downloadURL; 
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      throw error; 
-    }
-  };
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -47,9 +76,9 @@ const SettingsScreen = () => {
   
     console.log('Image picker result:', result);
   
-    if (result.assets && result.assets.length > 0 && result.assets[0].uri) {
+    if (!result.cancelled && result.assets && result.assets.length > 0 && result.assets[0].uri) {
       setImage(result.assets[0].uri);
-      uploadImageToStorage(result.assets[0].uri)
+      uploadImageAsync(result.assets[0].uri)
         .then(downloadURL => {
           console.log('Image uploaded successfully. Download URL:', downloadURL);
         })
@@ -61,35 +90,29 @@ const SettingsScreen = () => {
     }
   };
   
-  
-  
-
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <TouchableOpacity style={{marginTop:18 , marginRight: 5}} onPress={() => {
-    navigation.goBack(); 
-  }}>
+        <TouchableOpacity style={{marginTop:18 , marginRight: 5}} onPress={() => {
+          navigation.goBack(); 
+        }}>
           <Ionicons name="arrow-back" size={25} color="white" />
         </TouchableOpacity>
         <Text style={styles.headerText}>Settings</Text>
       </View>
       <ScrollView>
         {/* Profile section */}
-
         <View style={styles.container}>
-        <View style={{flexDirection: 'row', marginTop:20 , marginBottom:17}}>
-        <TouchableOpacity onPress={pickImage}>
-          <Image source={{ uri: image }} style={styles.profileImage} />
-        </TouchableOpacity>
-        <View style={{flexDirection: 'column' , marginLeft:15}}>
-
-< Text style={{fontSize: 18 ,marginBottom:10,fontWeight:'bold'}}>Programmer</Text>
-    <Text style={[styles.profileText,{fontWeight:'bold',color: '#888'}]}>Hey there, I am using WhatsApp.</Text>
-      </View>
-      </View>
-    </View>
+          <View style={{flexDirection: 'row', marginTop:20 , marginBottom:17}}>
+            <TouchableOpacity onPress={pickImage}>
+              <Image source={{ uri: image }} style={styles.profileImage} />
+            </TouchableOpacity>
+            <View style={{flexDirection: 'column' , marginLeft:15}}>
+              <Text style={{fontSize: 18 ,marginBottom:10,fontWeight:'bold'}}>Programmer</Text>
+              <Text style={[styles.profileText,{fontWeight:'bold',color: '#888'}]}>Hey there, I am using WhatsApp.</Text>
+            </View>
+          </View>
+        </View>
 
         <TouchableOpacity  style={{flexDirection: 'row'}}>
 <Image source={require('../../assets/key.png')} style={styles.arrowIcon} />

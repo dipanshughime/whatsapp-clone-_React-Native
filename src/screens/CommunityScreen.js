@@ -18,14 +18,14 @@ const CommunityScreen = () => {
           <Text style = {styles.recentText}>Recent Updates</Text>
     
           <View>
-            <StatusTile imageUri="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" userName = "Alex" time = "Today 1:40" />
-            <StatusTile imageUri="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" userName = "Alex" time = "Today 1:40" />
+            <StatusTile imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhABPoXj_XOL-vm9s9VPgvvehwcgaojZbvfw&s" userName = "Alex" time = "Today 1:40" />
+            <StatusTile imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkstvneL1UVFnPpjuthvShjgYbPSrdNXIMcw&s" userName = "Alex" time = "Today 1:40" />
           </View>
     
           <Text style = {styles.recentText}>Viewed Updates</Text>
           <View>
-            <StatusTile imageUri="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" userName = "Dear" time = "Yesterday 10:40" />
-            <StatusTile imageUri="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" userName = "Dear" time = "Yesterday 10:40" />
+            <StatusTile imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA-x12OfPPFFbnEuqRwqzyNu2Sz7xnhAftSg&s" userName = "Dear" time = "Yesterday 10:40" />
+            <StatusTile imageUri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG2W6HmuAOlQQJx44ywb3afUGMmTJfou3Mcg&s" userName = "Dear" time = "Yesterday 10:40" />
 
           </View>
         </>

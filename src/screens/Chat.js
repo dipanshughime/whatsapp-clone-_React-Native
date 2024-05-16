@@ -14,13 +14,12 @@ function Chat() {
   
   <View style={styles.container}>
     <ChatPgHeader/>
-      {/* Main content of the screen */}
+  
       <View style={styles.mainContent}>
-        {/* Your chat messages or other content */}
+       
         <ChatBody/>                                                                                             
       </View>
-      
-      {/* Chat input component positioned at the bottom */}
+   
       <View>
         <ChatInput />
       </View>

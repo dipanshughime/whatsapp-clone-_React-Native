@@ -3,6 +3,7 @@ import { View, Image,TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ChatInput = () => {
+  const [inputText, setInputText]=" ";
   return (
     <View style={styles.chatInputContainer}>
     

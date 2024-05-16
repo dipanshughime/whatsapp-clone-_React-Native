@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
       },
       text: {
-        color: 'white', // Text color
-        fontWeight: 'bold', // Make the text bold
+        color: 'white', 
+        fontWeight: 'bold',
       },
 
     container: {

@@ -12,6 +12,7 @@ import {auth} from './config/firebase';
 import { createStackNavigator } from '@react-navigation/stack';
 import Profile from './src/screens/Profile';
 import Chat from './src/screens/Chat';
+import { FloatingAction } from "react-native-floating-action";
 // import {onAuthStateChanged} from "firebase/auth" ;
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -44,6 +45,12 @@ function MainComponent({ navigation }) {
       </View>
     </View>
       <MyTabs />
+      <FloatingAction
+        actions={[]}
+        onPressMain={() => {}}
+        color = "#075E54"
+        floatingIcon={<Ionicons name="chatbox-ellipses" size={24} color="white" />}
+      />
       </>
   );
 }
@@ -110,7 +117,7 @@ function App({ navigation }) {
     });
   
 
-    // Cleanup subscription on unmount
+
     return () => unsubscribe();
   }, []);
   

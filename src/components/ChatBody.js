@@ -5,10 +5,7 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore';
  const firestore = getFirestore();
 const ChatBody = () => {
 
-  // Mock data for sender and receiver messages
-  // const messages = [
-  //   { id: 1, sender: 'sender', message: 'Hello', type: 'sender' },
-  //   { id: 2, sender: 'receiver', message: 'Hi there!', type: 'receiver' },
+
 
   const senderId='senderId';
   const receiverId ='receiverId';
@@ -16,7 +13,7 @@ const ChatBody = () => {
 
   const [messages, setMessages] = useState([]);
 
-  // Function to fetch chats from Firestore
+ 
   const fetchChats = async () => {
     try {
       const senderId = 'senderId'; 
@@ -44,8 +41,8 @@ const ChatBody = () => {
   
 
   useEffect(() => {
-    fetchChats(); // Fetch chats when component mounts
-  }, [senderId, receiverId]); // Fetch chats when senderId or receiverId changes
+    fetchChats(); 
+  }, [senderId, receiverId]); 
 
 
   return (
@@ -73,14 +70,14 @@ const styles = StyleSheet.create({
   },
   senderMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#DCF8C6', // Sender message background color
+    backgroundColor: '#DCF8C6', 
     padding: 10,
     marginVertical: 5,
     borderRadius: 10,
   },
   receiverMessage: {
     alignSelf: 'flex-start',
-    backgroundColor: 'white', // Receiver message background color
+    backgroundColor: 'white', 
     padding: 10,
     marginVertical: 5,
     borderRadius: 10,

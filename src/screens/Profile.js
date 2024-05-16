@@ -1,11 +1,12 @@
-import React ,{ useState }from 'react';
+import React ,{ useState,useEffect }from 'react';
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { auth ,storage, ref} from '../../config/firebase';
+import { auth ,storage, ref,doc,firestore} from '../../config/firebase';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import {   getDownloadURL ,uploadBytes } from "firebase/storage";
+import {  getDoc } from "firebase/firestore"
 // import { getStorage, ref, putFile, getDownloadURL } from 'firebase/storage';
 
 
@@ -21,6 +22,31 @@ const SettingsScreen = () => {
       })
       .catch(error => console.error('Error signing out: ', error));
   };
+
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userDocRef = doc(firestore, 'users', user.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            setUserName(userDoc.data().username);
+          } else {
+            console.log('No such document!');
+          }
+        } else {
+          console.log('No user is signed in.');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserName();
+  }, []);
 
 
   // const uploadImageToStorage = async (imageUri) => {
@@ -108,7 +134,7 @@ const SettingsScreen = () => {
               <Image source={{ uri: image }} style={styles.profileImage} />
             </TouchableOpacity>
             <View style={{flexDirection: 'column' , marginLeft:15}}>
-              <Text style={{fontSize: 18 ,marginBottom:10,fontWeight:'bold'}}>Programmer</Text>
+              <Text style={{fontSize: 18 ,marginBottom:10,fontWeight:'bold'}}>{userName}</Text>
               <Text style={[styles.profileText,{fontWeight:'bold',color: '#888'}]}>Hey there, I am using WhatsApp.</Text>
             </View>
           </View>

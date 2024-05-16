@@ -2,16 +2,24 @@ import React ,{ useState }from 'react';
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-// import { storage } from '../../config/firebase';
+import { auth } from '../../config/firebase';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 // import { getStorage, ref, putFile, getDownloadURL } from 'firebase/storage';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL  } from 'firebase/storage';
 
 
 const SettingsScreen = () => {
-  const initialImagePath ='../../assets/favicon.png';
-  const [image, setImage] = useState(initialImagePath);
+  const navigation = useNavigation();
+  const [image, setImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_8Ndh_6Yi1w8G7Yg5iGtCQQVreP5sWLdUbg&s");
 
-
+  const handleSignOut = () => {
+    auth.signOut()
+      .then(() => {
+        navigation.navigate('SignIn');
+      })
+      .catch(error => console.error('Error signing out: ', error));
+  };
   const uploadImageToStorage = async (imageUri) => {
     try {
       const filename = imageUri.split('/').pop();
@@ -60,6 +68,11 @@ const SettingsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+      <TouchableOpacity style={{marginTop:18 , marginRight: 5}} onPress={() => {
+    navigation.goBack(); 
+  }}>
+          <Ionicons name="arrow-back" size={25} color="white" />
+        </TouchableOpacity>
         <Text style={styles.headerText}>Settings</Text>
       </View>
       <ScrollView>
@@ -124,7 +137,7 @@ const SettingsScreen = () => {
 
         
 
-        <TouchableOpacity style={{flexDirection:'row'}}>
+        <TouchableOpacity  onPress={handleSignOut} style={{flexDirection:'row'} }>
 <Image source={require('../../assets/group.png')} style={styles.arrowIcon} />
 <View style={styles.settingItem}>
   
@@ -155,11 +168,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#075E54',
     paddingVertical: 15,
     paddingHorizontal: 20,
+    flexDirection:'row',
+    alignItems:"baseline",
+
   },
   headerText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
+    marginLeft:7
+   
+
   },
   profileSection: {
     padding: 20,

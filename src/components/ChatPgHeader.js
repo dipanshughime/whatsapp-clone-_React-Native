@@ -13,7 +13,7 @@ function ChatPgHeader() {
     <View style={styles.headerContainer}>
     <TouchableOpacity style={{flexDirection:'row'}}>
     <TouchableOpacity style={{marginTop:18 , marginRight: 5}} onPress={() => {
-    navigation.goBack(); // Navigate back to the previous screen
+    navigation.goBack(); 
   }}>
           <Ionicons name="arrow-back" size={25} color="white" />
         </TouchableOpacity>

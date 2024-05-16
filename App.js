@@ -70,7 +70,7 @@ function MyTabs() {
         }} 
       />
       <Tab.Screen name="Chats" component={AnotherScreen} />
-      <Tab.Screen name="Status" component={AnotherScreen} />
+      <Tab.Screen name="Status" component={CommunityScreen} />
       <Tab.Screen name="Calls" component={CommunityScreen} />
     </Tab.Navigator>
   );
@@ -138,8 +138,9 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    marginLeft: 10,
   },
   headerIcons: {
     flexDirection: 'row',

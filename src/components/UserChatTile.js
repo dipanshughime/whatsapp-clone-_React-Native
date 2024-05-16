@@ -3,14 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 
 import React from 'react'
 
-const UserChatTile = () => {
+const UserChatTile = ({imageUri}) => {
     const navigation = useNavigation();
   return (
     <TouchableOpacity  onPress={() => navigation.navigate('Chat')}>
     <View style={styles.container}>
     <View style={{flexDirection: 'row', marginTop:10,marginBottom:0 }}>
     
-      <Image source={require('../../assets/man.jpg')} style={styles.profileImage} />
+      <Image source={{ uri: imageUri }}  style={styles.profileImage} />
     
     <View style={{flexDirection: 'column' , marginLeft:15 }}>
 
@@ -20,7 +20,7 @@ const UserChatTile = () => {
   <View style={{flexDirection: 'column' , marginLeft:15 , alignItems:"center"}}>
   < Text style={{fontSize: 16 ,marginBottom:5,fontWeight:'bold', color:'green'}}>12:15</Text>
 <View style={styles.circle}>
-      <Text style={styles.text}>1</Text>
+      <Text style={styles.text}>2</Text>
     </View>
 
   </View>

@@ -1,14 +1,17 @@
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, Image ,StyleSheet} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import React from 'react'
 
 const UserChatTile = () => {
+    const navigation = useNavigation();
   return (
+    <TouchableOpacity  onPress={() => navigation.navigate('Chat')}>
     <View style={styles.container}>
     <View style={{flexDirection: 'row', marginTop:10,marginBottom:0 }}>
-    <TouchableOpacity >
+    
       <Image source={require('../../assets/man.jpg')} style={styles.profileImage} />
-    </TouchableOpacity>
+    
     <View style={{flexDirection: 'column' , marginLeft:15 }}>
 
 < Text style={{fontSize: 16 ,marginBottom:5,fontWeight:'bold'}}>Programmer</Text>
@@ -23,6 +26,7 @@ const UserChatTile = () => {
   </View>
   </View>
 </View>
+</TouchableOpacity>
   )
 }
 

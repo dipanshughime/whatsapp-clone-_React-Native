@@ -11,6 +11,7 @@ import SignInScreen from './src/screens/SignIn';
 import {auth} from './config/firebase';
 import { createStackNavigator } from '@react-navigation/stack';
 import Profile from './src/screens/Profile';
+import Chat from './src/screens/Chat';
 // import {onAuthStateChanged} from "firebase/auth" ;
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -106,6 +107,7 @@ function App({ navigation }) {
             <>
               <Stack.Screen name="Main" component={MainComponent} />
               <Stack.Screen name="Profile" component={Profile} />
+              <Stack.Screen name="Chat" component={Chat} />
             </>
           ) : (
             <>
